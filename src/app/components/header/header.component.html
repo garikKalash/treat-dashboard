@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Welcome TREAT dashboard</h2>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Shelter</mat-label>
+      <mat-select [(value)]="shelterId"
+                  (selectionChange)="refreshData()"
+                  [disableOptionCentering]="true">
+        <mat-option *ngFor="let shelter of shelters" [value]="shelter.orgId">
+          {{shelter.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>
+

@@ -1,0 +1,16 @@
+
+.section {
+  display: flex;
+  padding: 5rem;
+}
+
+.picker_btn {
+  background-color: hotpink;
+  border-radius: 5px;
+  border: none;
+}
+
+
+
+
+

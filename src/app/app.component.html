@@ -1,0 +1,61 @@
+<app-header (refresh)="refreshData($event)"></app-header>
+<div class="container">
+<div id="shelter-main-data">
+  <div id="shelter-name-container" class="shelter-name-container">
+    <div>
+      <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
+      <p *ngIf="activeAnimalCount">
+        <span style="font-weight: bold">Adoptable animals imported:</span> {{activeAnimalCount}}
+      </p>
+    </div>
+  </div>
+  <hr>
+  <div id="details-id" style="font-size:2vw;">
+    <div>Visitors: {{shelterData?.visitors}}</div>
+    <div>Address: {{shelterData?.shelterAddress?.address1}}</div>
+    <div>City: {{shelterData?.shelterAddress?.city}}</div>
+    <div>Country: {{shelterData?.shelterAddress?.country}}</div>
+    <div>Postal code: {{shelterData?.shelterAddress?.postcode}}</div>
+  </div>
+</div>
+  <div class="section">
+    <!-- datepicker-->
+    <div>
+      <form [formGroup]="form">
+        <h2>Select date range</h2>
+        <div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+              <input matStartDate placeholder="Start date" [(ngModel)]="start"  formControlName="start">
+              <input matEndDate placeholder="End date" [(ngModel)]="end" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div>
+          <button class="picker_btn" (click)="onSubmit(start, end)">Select</button>
+        </div>
+      </form>
+    </div>
+    <!-- datepicker-->
+  </div>
+
+<div id="treat-data-id" style="padding-left: 9%; padding-right: 9%; margin-top: 3%; font-size:2vw;">
+  <div *ngIf="shelterUpcomingData" style="display: inline; float: left">
+    <h1 style="font-size:2vw;">Upcoming items</h1>
+    <p>Treats: {{shelterUpcomingData?.treats}}</p>
+    <p>Meals: {{shelterUpcomingData?.meals}}</p>
+    <p>Toys: {{shelterUpcomingData?.toys}}</p>
+    <p>Food grains: {{shelterUpcomingData?.foodGrains}}</p>
+  </div>
+
+  <div *ngIf="shelterSentData" style="display: inline; float: right">
+    <h1 style="font-size:2vw;">Sent items</h1>
+    <p>Treats: {{shelterSentData?.treats}}</p>
+    <p>Meals: {{shelterSentData?.meals}}</p>
+    <p>Toys: {{shelterSentData?.toys}}</p>
+    <p>Food grains: {{shelterSentData?.foodGrains}}</p>
+  </div>
+</div>
+</div>
