@@ -13,6 +13,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatSelectModule} from "@angular/material/select";
     ReactiveFormsModule,
     MatIconModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [ShelterService],
   bootstrap: [AppComponent]

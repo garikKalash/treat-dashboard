@@ -1,4 +1,22 @@
 <app-header (refresh)="refreshData($event)"></app-header>
+
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Enter a date range</mat-label>
+  <mat-date-range-input [rangePicker]="picker" >
+    <input matStartDate placeholder="Start date" [(ngModel)]="start"  >
+    <input matEndDate placeholder="End date" [(ngModel)]="end" >
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker>
+    <mat-date-range-picker-actions>
+      <button mat-button matDateRangePickerCancel>Cancel</button>
+      <button mat-raised-button color="primary" matDateRangePickerApply (click)="onSubmit(start, end)">Apply</button>
+    </mat-date-range-picker-actions>
+  </mat-date-range-picker>
+</mat-form-field>
+
+
+
 <div class="container">
 <div id="shelter-main-data">
   <div id="shelter-name-container" class="shelter-name-container">
@@ -18,29 +36,6 @@
     <div>Postal code: {{shelterData?.shelterAddress?.postcode}}</div>
   </div>
 </div>
-  <div class="section">
-    <!-- datepicker-->
-    <div>
-      <form [formGroup]="form">
-        <h2>Select date range</h2>
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
-              <input matStartDate placeholder="Start date" [(ngModel)]="start"  formControlName="start">
-              <input matEndDate placeholder="End date" [(ngModel)]="end" formControlName="end">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field>
-        </div>
-        <div>
-          <button class="picker_btn" (click)="onSubmit(start, end)">Select</button>
-        </div>
-      </form>
-    </div>
-    <!-- datepicker-->
-  </div>
-
 <div id="treat-data-id" style="padding-left: 9%; padding-right: 9%; margin-top: 3%; font-size:2vw;">
   <div *ngIf="shelterUpcomingData" style="display: inline; float: left">
     <h1 style="font-size:2vw;">Upcoming items</h1>
