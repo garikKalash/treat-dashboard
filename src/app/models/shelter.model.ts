@@ -1,4 +1,5 @@
 import { Address } from "./address.model";
+import {Comment} from "./comment.model";
 
 export class Shelter {
   name?: string;
@@ -6,4 +7,5 @@ export class Shelter {
   visitors?: number;
   shelterLink?: string;
   shelterAddress?: Address;
+  comments?: Comment[] = [];
 }

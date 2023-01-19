@@ -5,6 +5,8 @@ import {Shelter} from "../models/shelter.model";
 import {Observable} from "rxjs";
 import {ShelterItems} from "../models/shelter-items.model";
 import {DateRange} from "../models/date-range";
+import {ReportView} from "../models/report-view.model";
+import {Comment} from "../models/comment.model";
 
 @Injectable()
 export class ShelterService {
@@ -24,22 +26,18 @@ export class ShelterService {
     return this.httpClient.get<Shelter>(`${environment.apiUrl}/rest/shelter/${id}`);
   }
 
-  shelterUpcomingItems(id?: string): Observable<ShelterItems> {
-    return this.httpClient.get<ShelterItems>(`${environment.apiUrl}/rest/shelter/${id}/upcoming-items`);
+  shelterSentItems(id?: string): Observable<ReportView> {
+    return this.httpClient.get<ReportView>(`${environment.apiUrl}/rest/shelter/${id}/report-details`);
   }
 
-  shelterSentItems(id?: string): Observable<ShelterItems> {
-    return this.httpClient.get<ShelterItems>(`${environment.apiUrl}/rest/shelter/${id}/sent-items`);
-  }
-
-  activeAnimalCount(id?: string): Observable<number> {
-    return this.httpClient.get<number>(`${environment.apiUrl}/rest/shelter/${id}/animals-active`);
-  }
-
-  shelterSentItemsByDate(id?: string, dataRange?: DateRange): Observable<ShelterItems> {
+  shelterSentItemsByDate(id?: string, dataRange?: DateRange): Observable<ReportView> {
     console.log(id);
     let start = dataRange?.start ? dataRange.start : '';
     let end = dataRange?.end ? dataRange.end : '';
-    return this.httpClient.get<ShelterItems>(`${environment.apiUrl}/rest/shelter/PA109/sent-items?from=${start}&to=${end}`);
+    return this.httpClient.get<ReportView>(`${environment.apiUrl}/rest/shelter/${id}/report-details?from=${start}&to=${end}`);
+  }
+
+  updateComments(id?: string, comments? : Comment[]): Observable<any>{
+    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelter/${id}/comments`, comments);
   }
 }

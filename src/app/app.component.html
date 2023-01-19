@@ -1,22 +1,4 @@
 <app-header (refresh)="refreshData($event)"></app-header>
-
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [rangePicker]="picker" >
-    <input matStartDate placeholder="Start date" [(ngModel)]="start"  >
-    <input matEndDate placeholder="End date" [(ngModel)]="end" >
-  </mat-date-range-input>
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker>
-    <mat-date-range-picker-actions>
-      <button mat-button matDateRangePickerCancel>Cancel</button>
-      <button mat-raised-button color="primary" matDateRangePickerApply (click)="onSubmit(start, end)">Apply</button>
-    </mat-date-range-picker-actions>
-  </mat-date-range-picker>
-</mat-form-field>
-
-
-
 <div class="container">
 <div id="shelter-main-data">
   <div id="shelter-name-container" class="shelter-name-container">
@@ -24,10 +6,69 @@
       <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
       <p *ngIf="activeAnimalCount">
         <span style="font-weight: bold">Adoptable animals imported:</span> {{activeAnimalCount}}
+
+      </p>
+      <p *ngIf="usersUsedShelter">
+        <span style="font-weight: bold">Users in shelter:</span> {{usersUsedShelter}}
+
       </p>
     </div>
   </div>
+  <mat-accordion>
+    <mat-expansion-panel (opened)="showComments = true"
+                         (closed)="showComments = false">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          Comments
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div  *ngIf="shelterData?.comments?.length == 0">
+        <p> No comments</p>
+      </div>
+      <div *ngFor="let comment of shelterData?.comments;index as indexOfelement;">
+        <div style="border: 1px gray solid; border-radius: 3px">
+          <div >
+            <div style="float: left">
+              <p>{{comment.comment}}</p>
+            </div>
+            <div style="float: right">
+              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+              (click)="shelterData?.comments?.splice(indexOfelement, 1); saveComments()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div style="clear:both">
+            <p style="text-align: right">Created at: {{comment.createdTime?.split('T', 1)}}</p>
+          </div>
+        </div>
+      </div>
+      <mat-form-field style="width: 100%">
+        <mat-label>Add a comment</mat-label>
+        <textarea matInput placeholder="Your comment here..." [(ngModel)]="newComment"></textarea>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="saveComments()">Save comment</button>
+
+    </mat-expansion-panel>
+  </mat-accordion>
   <hr>
+  <div style="text-align: right">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" >
+      <input matStartDate placeholder="Start date" [(ngModel)]="start"  >
+      <input matEndDate placeholder="End date" [(ngModel)]="end" >
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker>
+      <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDateRangePickerApply (click)="onSubmit(start, end)">Apply</button>
+      </mat-date-range-picker-actions>
+    </mat-date-range-picker>
+  </mat-form-field>
+  </div>
+  <div class="warning" *ngIf="serverError">{{serverError}}</div>
   <div id="details-id" style="font-size:2vw;">
     <div>Visitors: {{shelterData?.visitors}}</div>
     <div>Address: {{shelterData?.shelterAddress?.address1}}</div>
@@ -54,3 +95,5 @@
   </div>
 </div>
 </div>
+
+<div class="cfooter">Last sync: {{lastSync}}</div>

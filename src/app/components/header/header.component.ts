@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.shelters = this.shelterService.shelters();
+    this.shelterId = this.shelters[0].orgId
   }
 
   refreshData() {

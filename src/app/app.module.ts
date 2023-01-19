@@ -14,6 +14,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     FormsModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule,
+    MatInputModule
   ],
   providers: [ShelterService],
   bootstrap: [AppComponent]
