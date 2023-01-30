@@ -6,6 +6,7 @@ import {ShelterItems} from "./models/shelter-items.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {DateRange} from "./models/date-range";
 import {Comment} from "./models/comment.model";
+import {ShelterPackage} from "./models/shelter-package.model";
 
 @Component({
   selector: 'app-root',
@@ -24,14 +25,12 @@ export class AppComponent implements OnInit {
   start?: string;
   end?: string;
   shelters?: Array<Shelter>;
-
+  shelterPackages?: Array<ShelterPackage>;
   lastSync?:string;
-
   newComment?: string;
-
   showComments: boolean = false;
-
   serverError?: string;
+
 
   constructor(private route: ActivatedRoute,
               private shelterService: ShelterService,
@@ -63,6 +62,9 @@ export class AppComponent implements OnInit {
           this.usersUsedShelter = sitems.users;
           this.lastSync = sitems.lastSync?.usersTime;
         })
+        this.shelterService.packages(sid).subscribe(packages => {
+          this.shelterPackages = packages;
+        })
         }
       );
 
@@ -83,23 +85,6 @@ export class AppComponent implements OnInit {
    }, error => {
      this.serverError = error.error.message;
    });
-  }
-
-  refreshData($event: any) {
-    this.shelterId = $event.shelterId
-    this.serverError = undefined;
-    this.shelterService.shelter(this.shelterId).subscribe(sh =>{
-      this.shelterData = sh;
-    })
-    this.shelterService.shelterSentItems(this.shelterId).subscribe(sitems =>{
-      this.shelterSentData = sitems.shelterTreats;
-      this.activeAnimalCount = sitems.importedAnimals;
-      this.shelterUpcomingData = sitems.upcomingTreats;
-      this.usersUsedShelter = sitems.users;
-      this.lastSync = sitems.lastSync?.usersTime;
-    }, error => {
-      this.serverError = error.error.message;
-    })
   }
 
   saveComments(){

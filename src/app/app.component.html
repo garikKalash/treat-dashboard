@@ -1,8 +1,8 @@
-<app-header (refresh)="refreshData($event)"></app-header>
-<div class="container">
-<div id="shelter-main-data">
+<app-header></app-header>
+<div class="container" style="height: 80%">
+<div id="shelter-main-data" style="height: 75%; width: 100%">
   <div id="shelter-name-container" class="shelter-name-container">
-    <div>
+    <div style="float: left; width: 50%">
       <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
       <p *ngIf="activeAnimalCount">
         <span style="font-weight: bold">Adoptable animals imported:</span> {{activeAnimalCount}}
@@ -13,77 +13,97 @@
 
       </p>
     </div>
+    <div id="details-id" style="font-size:2vw; float: right; width: 50%">
+      <div>Visitors: {{shelterData?.visitors}}</div>
+      <div>Address: {{shelterData?.shelterAddress?.address1}}</div>
+      <div>City: {{shelterData?.shelterAddress?.city}}</div>
+      <div>Country: {{shelterData?.shelterAddress?.country}}</div>
+      <div>Postal code: {{shelterData?.shelterAddress?.postcode}}</div>
+    </div>
   </div>
-  <mat-accordion>
-    <mat-expansion-panel (opened)="showComments = true"
-                         (closed)="showComments = false">
-      <mat-expansion-panel-header>
-        <mat-panel-description>
-          Comments
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div  *ngIf="shelterData?.comments?.length == 0">
-        <p> No comments</p>
-      </div>
-      <div *ngFor="let comment of shelterData?.comments;index as indexOfelement;">
-        <div style="border: 1px gray solid; border-radius: 3px">
-          <div >
-            <div style="float: left">
-              <p>{{comment.comment}}</p>
-            </div>
-            <div style="float: right">
-              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
-              (click)="shelterData?.comments?.splice(indexOfelement, 1); saveComments()">
-                <mat-icon>delete</mat-icon>
-              </button>
+  <div style="width: 100%" class="shelter-data">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="end">
+      <mat-tab label="Comments"><mat-accordion>
+        <mat-expansion-panel (opened)="true"
+                             (closed)="showComments = false">
+          <mat-expansion-panel-header>
+            <mat-panel-description>
+              Comments
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div  *ngIf="shelterData?.comments?.length == 0">
+            <p> No comments</p>
+          </div>
+          <div *ngFor="let comment of shelterData?.comments;index as indexOfelement;">
+            <div style="border: 1px gray solid; border-radius: 3px">
+              <div >
+                <div style="float: left">
+                  <p>{{comment.comment}}</p>
+                </div>
+                <div style="float: right">
+                  <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+                          (click)="shelterData?.comments?.splice(indexOfelement, 1); saveComments()">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div style="clear:both">
+                <p style="text-align: right">Created at: {{comment.createdTime?.split('T', 1)}}</p>
+              </div>
             </div>
           </div>
-          <div style="clear:both">
-            <p style="text-align: right">Created at: {{comment.createdTime?.split('T', 1)}}</p>
-          </div>
-        </div>
-      </div>
-      <mat-form-field style="width: 100%">
-        <mat-label>Add a comment</mat-label>
-        <textarea matInput placeholder="Your comment here..." [(ngModel)]="newComment"></textarea>
-      </mat-form-field>
-      <button mat-button color="primary" (click)="saveComments()">Save comment</button>
+          <mat-form-field style="width: 100%">
+            <mat-label>Add a comment</mat-label>
+            <textarea matInput placeholder="Your comment here..." [(ngModel)]="newComment"></textarea>
+          </mat-form-field>
+          <button mat-button color="primary" (click)="saveComments()">Save comment</button>
 
-    </mat-expansion-panel>
-  </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion></mat-tab>
+      <mat-tab label="Packages">
+        <mat-list>
+          <mat-list-item *ngFor="let shelterPackage of shelterPackages;index as indexOfelement;" style="width: 100%">
+            <p >{{shelterPackage.orderId}}</p>
+            <p style="color: gray; font-size: small; margin-left: 5%" >Items: {{shelterPackage.items?.length}}</p>
+            <p style="color: gray; font-size: small; margin-left: 5%" >Total price: {{shelterPackage.totalAmount}}$</p>
+            <p style="color: gray; font-size: small; margin-left: 5%" >Placed on: {{shelterPackage.startDate}}</p>
+            <p [ngStyle]="{color: shelterPackage.status == 'ON_WAY' ? 'orange' :
+            shelterPackage.status == 'CREATED' ? 'gray' :
+            shelterPackage.status == 'ARRIVED' ? 'green' : 'red',
+            'font-size': 'small', 'margin-left': '20%'}" > {{shelterPackage.status}}</p>
+          </mat-list-item>
+        </mat-list>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>
   <hr>
+<div id="treat-data-id" style="height: 25%; width: 100%;">
   <div style="text-align: right">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [rangePicker]="picker" >
-      <input matStartDate placeholder="Start date" [(ngModel)]="start"  >
-      <input matEndDate placeholder="End date" [(ngModel)]="end" >
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker>
-      <mat-date-range-picker-actions>
-        <button mat-button matDateRangePickerCancel>Cancel</button>
-        <button mat-raised-button color="primary" matDateRangePickerApply (click)="onSubmit(start, end)">Apply</button>
-      </mat-date-range-picker-actions>
-    </mat-date-range-picker>
-  </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" >
+        <input matStartDate placeholder="Start date" [(ngModel)]="start"  >
+        <input matEndDate placeholder="End date" [(ngModel)]="end" >
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply (click)="onSubmit(start, end)">Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
   </div>
   <div class="warning" *ngIf="serverError">{{serverError}}</div>
-  <div id="details-id" style="font-size:2vw;">
-    <div>Visitors: {{shelterData?.visitors}}</div>
-    <div>Address: {{shelterData?.shelterAddress?.address1}}</div>
-    <div>City: {{shelterData?.shelterAddress?.city}}</div>
-    <div>Country: {{shelterData?.shelterAddress?.country}}</div>
-    <div>Postal code: {{shelterData?.shelterAddress?.postcode}}</div>
-  </div>
-</div>
-<div id="treat-data-id" style="padding-left: 9%; padding-right: 9%; margin-top: 3%; font-size:2vw;">
   <div *ngIf="shelterSentData" style="display: inline; float: right">
     <h1 style="font-size:2vw;">Sent items</h1>
-    <p>Treats: {{shelterSentData?.treats}}</p>
-    <p>Meals: {{shelterSentData?.meals}}</p>
-    <p>Toys: {{shelterSentData?.toys}}</p>
-    <p>Food grains: {{shelterSentData?.foodGrains}}</p>
+    <p><span style="font-weight: bold">Treats:</span> {{shelterSentData?.treats}}
+      <span style="font-weight: bold">Meals:</span> {{shelterSentData?.meals}}
+      <span style="font-weight: bold">Toys:</span> {{shelterSentData?.toys}}
+      <span style="font-weight: bold">Food grains:</span> {{shelterSentData?.foodGrains}}</p>
   </div>
 </div>
 </div>

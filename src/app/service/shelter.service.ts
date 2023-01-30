@@ -7,6 +7,8 @@ import {ShelterItems} from "../models/shelter-items.model";
 import {DateRange} from "../models/date-range";
 import {ReportView} from "../models/report-view.model";
 import {Comment} from "../models/comment.model";
+import {PackageItem} from "../models/package-item.model";
+import {ShelterPackage} from "../models/shelter-package.model";
 
 @Injectable()
 export class ShelterService {
@@ -35,6 +37,11 @@ export class ShelterService {
     let start = dataRange?.start ? dataRange.start : '';
     let end = dataRange?.end ? dataRange.end : '';
     return this.httpClient.get<ReportView>(`${environment.apiUrl}/rest/shelter/${id}/report-details?from=${start}&to=${end}`);
+  }
+
+  packages(id?: string): Observable<ShelterPackage[]> {
+    console.log(id);
+    return this.httpClient.get<ShelterPackage[]>(`${environment.apiUrl}/rest/shelter/${id}/chewy-packages`);
   }
 
   updateComments(id?: string, comments? : Comment[]): Observable<any>{

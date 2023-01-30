@@ -16,6 +16,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatInputModule} from "@angular/material/input";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import {MatInputModule} from "@angular/material/input";
     MatSelectModule,
     MatButtonModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [ShelterService],
   bootstrap: [AppComponent]

@@ -8,20 +8,7 @@ import {Shelter} from "../../models/shelter.model";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  shelterId?: string;
-  shelters?: Array<Shelter>;
+export class HeaderComponent {
 
-  @Output() refresh= new EventEmitter();
 
-  constructor(private shelterService: ShelterService) { }
-
-  ngOnInit(): void {
-    this.shelters = this.shelterService.shelters();
-    this.shelterId = this.shelters[0].orgId
-  }
-
-  refreshData() {
-    this.refresh.emit({"shelterId": this.shelterId});
-  }
 }
