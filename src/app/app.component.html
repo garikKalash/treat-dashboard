@@ -62,15 +62,20 @@
       </mat-accordion></mat-tab>
       <mat-tab label="Packages">
         <mat-list>
-          <mat-list-item *ngFor="let shelterPackage of shelterPackages;index as indexOfelement;" style="width: 100%">
+          <mat-list-item *ngFor="let shelterPackage of shelterPackages;index as indexOfelement;" style="width: 100%"
+            [ngStyle]="{'height': '160px'}">
             <p >{{shelterPackage.orderId}}</p>
-            <p style="color: gray; font-size: small; margin-left: 5%" >Items: {{shelterPackage.items?.length}}</p>
-            <p style="color: gray; font-size: small; margin-left: 5%" >Total price: {{shelterPackage.totalAmount}}$</p>
+            <div style="color: gray; font-size: small; margin-left: 5%" >
+              <p *ngFor="let pitem of shelterPackage.items;index as indexOfelement;">
+                {{pitem.quantity}} X {{pitem.name}}
+              </p>
+
+            </div>
             <p style="color: gray; font-size: small; margin-left: 5%" >Placed on: {{shelterPackage.startDate}}</p>
             <p [ngStyle]="{color: shelterPackage.status == 'ON_WAY' ? 'orange' :
             shelterPackage.status == 'CREATED' ? 'gray' :
             shelterPackage.status == 'ARRIVED' ? 'green' : 'red',
-            'font-size': 'small', 'margin-left': '20%'}" > {{shelterPackage.status}}</p>
+            'font-size': 'small', 'margin-left': '25%'}" > {{shelterPackage.status}}</p>
           </mat-list-item>
         </mat-list>
 
