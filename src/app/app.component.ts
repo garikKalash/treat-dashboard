@@ -33,6 +33,9 @@ export class AppComponent implements OnInit {
 
   noPassedShelter?: boolean = true;
 
+  deliveredMeals?: number = 0;
+  deliveredTreats?: number = 0;
+
 
   constructor(private route: ActivatedRoute,
               private shelterService: ShelterService,
@@ -69,6 +72,8 @@ export class AppComponent implements OnInit {
             this.lastSync = sitems.lastSync?.usersTime;
           })
           this.shelterService.packages(this.shelterId).subscribe(packages => {
+            this.deliveredMeals = 0;
+            this.deliveredTreats = 0;
             this.shelterPackages = packages;
             for(const p of this.shelterPackages){
               // @ts-ignore
@@ -77,11 +82,17 @@ export class AppComponent implements OnInit {
                   const weightPart = pi.name.split(',')[1].trim().split('-')[0];
                   const weight = +weightPart;
                   pi.meals =  5.33 * weight * pi.quantity;
+                  // @ts-ignore
+                  if(p.status == 'ARRIVED')
+                  this.deliveredMeals = this.deliveredMeals + pi.meals;
                 }
                 if(pi.name && pi.quantity && pi.name.includes('Treats')){
                   const weightPart = pi.name.split(',')[1].trim().split('-')[0];
                   const weight = +weightPart;
                   pi.treats = (272/15) * weight * pi.quantity;
+                  // @ts-ignore
+                  if(p.status == 'ARRIVED')
+                  this.deliveredTreats = this.deliveredTreats + pi.treats;
                 }
               }
             }
@@ -109,6 +120,8 @@ export class AppComponent implements OnInit {
    });
     this.shelterService.packages(this.shelterId, dataRange).subscribe(packages => {
       this.shelterPackages = packages;
+      this.deliveredMeals = 0;
+      this.deliveredTreats = 0;
       for(const p of this.shelterPackages){
         // @ts-ignore
         for(let pi of p.items ) {
@@ -116,29 +129,35 @@ export class AppComponent implements OnInit {
             const weightPart = pi.name.split(',')[1].trim().split('-')[0];
             const weight = +weightPart;
             pi.meals =  5.33 * weight * pi.quantity;
+            // @ts-ignore
+            if(p.status == 'ARRIVED')
+            this.deliveredMeals = this.deliveredMeals + pi.meals;
           }
           if(pi.name && pi.quantity && pi.name.includes('Treats')){
             const weightPart = pi.name.split(',')[1].trim().split('-')[0];
             const weight = +weightPart;
             pi.treats = (272/15) * weight * pi.quantity;
+            // @ts-ignore
+            if(p.status == 'ARRIVED')
+            this.deliveredTreats = this.deliveredTreats + pi.treats;
           }
         }
       }
     })
   }
 
-  saveComments(){
+  saveComments() {
     this.serverError = undefined;
-    if(this.newComment){
+    if (this.newComment) {
       let comment = {comment: this.newComment}
       this.shelterData?.comments?.push(comment);
     }
-    this.shelterService.updateComments(this.shelterData?.orgId, this.shelterData?.comments).subscribe(res=>{
+    this.shelterService.updateComments(this.shelterData?.orgId, this.shelterData?.comments).subscribe(res => {
       console.log('Comments are saved')
-      this.shelterService.shelter(this.shelterId).subscribe(sh =>{
+      this.shelterService.shelter(this.shelterId).subscribe(sh => {
         this.shelterData = sh;
       })
-      if(this.newComment){
+      if (this.newComment) {
         this.newComment = undefined;
       }
     })
