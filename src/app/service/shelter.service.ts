@@ -39,9 +39,11 @@ export class ShelterService {
     return this.httpClient.get<ReportView>(`${environment.apiUrl}/rest/shelter/${id}/report-details?from=${start}&to=${end}`);
   }
 
-  packages(id?: string): Observable<ShelterPackage[]> {
+  packages(id?: string, dataRange?: DateRange): Observable<ShelterPackage[]> {
     console.log(id);
-    return this.httpClient.get<ShelterPackage[]>(`${environment.apiUrl}/rest/shelter/${id}/chewy-packages`);
+    let start = dataRange?.start ? dataRange.start : '';
+    let end = dataRange?.end ? dataRange.end : '';
+    return this.httpClient.get<ShelterPackage[]>(`${environment.apiUrl}/rest/shelter/${id}/chewy-packages?from=${start}&to=${end}`);
   }
 
   updateComments(id?: string, comments? : Comment[]): Observable<any>{

@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
   showComments: boolean = false;
   serverError?: string;
 
+  noPassedShelter?: boolean = true;
+
 
   constructor(private route: ActivatedRoute,
               private shelterService: ShelterService,
@@ -49,22 +51,42 @@ export class AppComponent implements OnInit {
       .subscribe(params => {
           console.log(params);
         // @ts-ignore
-        const sid = params.shelter_id ? params.shelter_id : this.shelters[0].orgId;
-        // @ts-ignore
-          this.shelterService.shelter(sid).subscribe(sh =>{
+        if(params.shelter_id){
+          this.noPassedShelter = false;
+          // @ts-ignore
+          this.shelterId = params.shelter_id;
+          this.shelterService.shelter(this.shelterId).subscribe(sh =>{
             this.shelterData = sh;
-            this.shelterId = sid;
+            this.noPassedShelter = false;
+          }, error => {
+            this.noPassedShelter = true;
           })
-        this.shelterService.shelterSentItems(sid).subscribe(sitems =>{
-          this.shelterSentData = sitems.shelterTreats;
-          this.activeAnimalCount = sitems.importedAnimals;
-          this.shelterUpcomingData = sitems.upcomingTreats;
-          this.usersUsedShelter = sitems.users;
-          this.lastSync = sitems.lastSync?.usersTime;
-        })
-        this.shelterService.packages(sid).subscribe(packages => {
-          this.shelterPackages = packages;
-        })
+          this.shelterService.shelterSentItems(this.shelterId).subscribe(sitems =>{
+            this.shelterSentData = sitems.shelterTreats;
+            this.activeAnimalCount = sitems.importedAnimals;
+            this.shelterUpcomingData = sitems.upcomingTreats;
+            this.usersUsedShelter = sitems.users;
+            this.lastSync = sitems.lastSync?.usersTime;
+          })
+          this.shelterService.packages(this.shelterId).subscribe(packages => {
+            this.shelterPackages = packages;
+            for(const p of this.shelterPackages){
+              // @ts-ignore
+              for(let pi of p.items ) {
+                if(pi.name && pi.quantity && pi.name.includes('Kibble')){
+                  const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+                  const weight = +weightPart;
+                  pi.meals =  5.33 * weight * pi.quantity;
+                }
+                if(pi.name && pi.quantity && pi.name.includes('Treats')){
+                  const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+                  const weight = +weightPart;
+                  pi.treats = (272/15) * weight * pi.quantity;
+                }
+              }
+            }
+          })
+        }
         }
       );
 
@@ -85,6 +107,24 @@ export class AppComponent implements OnInit {
    }, error => {
      this.serverError = error.error.message;
    });
+    this.shelterService.packages(this.shelterId, dataRange).subscribe(packages => {
+      this.shelterPackages = packages;
+      for(const p of this.shelterPackages){
+        // @ts-ignore
+        for(let pi of p.items ) {
+          if(pi.name && pi.quantity && pi.name.includes('Kibble')){
+            const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+            const weight = +weightPart;
+            pi.meals =  5.33 * weight * pi.quantity;
+          }
+          if(pi.name && pi.quantity && pi.name.includes('Treats')){
+            const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+            const weight = +weightPart;
+            pi.treats = (272/15) * weight * pi.quantity;
+          }
+        }
+      }
+    })
   }
 
   saveComments(){
