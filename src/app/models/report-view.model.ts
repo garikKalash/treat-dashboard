@@ -8,4 +8,5 @@ export class ReportView {
   users? : number;
   importedAnimals? : number;
   lastSync? : LastSync;
+  deepLinkCount? : number;
 }

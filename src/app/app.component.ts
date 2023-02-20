@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ShelterService} from "./service/shelter.service";
 import {Shelter} from "./models/shelter.model";
@@ -7,6 +7,9 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {DateRange} from "./models/date-range";
 import {Comment} from "./models/comment.model";
 import {ShelterPackage} from "./models/shelter-package.model";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -19,6 +22,7 @@ export class AppComponent implements OnInit {
   shelterSentData?: ShelterItems;
   shelterUpcomingData?: ShelterItems;
   activeAnimalCount?: number;
+  deeplinkCount?: number;
   usersUsedShelter?: number;
   shelterId?: string;
   form!: FormGroup;
@@ -26,6 +30,8 @@ export class AppComponent implements OnInit {
   end?: string;
   shelters?: Array<Shelter>;
   shelterPackages?: Array<ShelterPackage>;
+  showedPackages?: Observable<any>;
+  @ViewChild('paginator') paginator?: MatPaginator;
   lastSync?:string;
   newComment?: string;
   showComments: boolean = false;
@@ -35,6 +41,9 @@ export class AppComponent implements OnInit {
 
   deliveredMeals?: number = 0;
   deliveredTreats?: number = 0;
+
+  packagePageIndex?: number = 0;
+  dataSourceWithPageSize?: MatTableDataSource<ShelterPackage>;
 
 
   constructor(private route: ActivatedRoute,
@@ -70,6 +79,7 @@ export class AppComponent implements OnInit {
             this.shelterUpcomingData = sitems.upcomingTreats;
             this.usersUsedShelter = sitems.users;
             this.lastSync = sitems.lastSync?.usersTime;
+            this.deeplinkCount = sitems.deepLinkCount;
           })
           this.shelterService.packages(this.shelterId).subscribe(packages => {
             this.deliveredMeals = 0;
@@ -96,6 +106,11 @@ export class AppComponent implements OnInit {
                 }
               }
             }
+
+            this.dataSourceWithPageSize = new MatTableDataSource(this.shelterPackages);
+            // @ts-ignore
+            this.dataSourceWithPageSize.paginator = this.paginator;
+            this.showedPackages = this.dataSourceWithPageSize.connect()
           })
         }
         }
@@ -115,6 +130,7 @@ export class AppComponent implements OnInit {
      this.shelterUpcomingData = sitems.upcomingTreats;
      this.usersUsedShelter = sitems.users;
      this.lastSync = sitems.lastSync?.usersTime;
+     this.deeplinkCount = sitems.deepLinkCount;
    }, error => {
      this.serverError = error.error.message;
    });
@@ -143,6 +159,9 @@ export class AppComponent implements OnInit {
           }
         }
       }
+      this.dataSourceWithPageSize = new MatTableDataSource(this.shelterPackages);
+      this.showedPackages = this.dataSourceWithPageSize.connect()
+
     })
   }
 
@@ -161,5 +180,12 @@ export class AppComponent implements OnInit {
         this.newComment = undefined;
       }
     })
+  }
+
+  getDate(seconds? : number){
+    if(seconds)
+    return new Date(seconds * 1000);
+
+    return new Date();
   }
 }

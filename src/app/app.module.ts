@@ -18,6 +18,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatInputModule} from "@angular/material/input";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatListModule} from "@angular/material/list";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -26,24 +27,25 @@ import {MatListModule} from "@angular/material/list";
     HeaderComponent,
     FooterComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    FormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatTabsModule,
-    MatListModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        FormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatInputModule,
+        MatTabsModule,
+        MatListModule,
+        MatPaginatorModule
+    ],
   providers: [ShelterService],
   bootstrap: [AppComponent]
 })

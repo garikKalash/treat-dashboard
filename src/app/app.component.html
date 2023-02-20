@@ -9,12 +9,14 @@
     <div style="float: left; width: 50%">
       <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
       <p *ngIf="activeAnimalCount">
-        <span style="font-weight: bold">Adoptable animals imported:</span> {{activeAnimalCount}}
+        <span style="font-weight: bold">Current adoptable animals in shelter</span> {{activeAnimalCount}}
 
+      </p>
+      <p *ngIf="deeplinkCount">
+        <span style="font-weight: bold">Deeplink used:</span> {{deeplinkCount}}
       </p>
       <p *ngIf="usersUsedShelter">
         <span style="font-weight: bold">Users in shelter:</span> {{usersUsedShelter}}
-
       </p>
     </div>
     <div id="details-id" style="float: right; width: 50%">
@@ -65,9 +67,12 @@
         </mat-expansion-panel>
       </mat-accordion></mat-tab>
       <mat-tab label="Packages">
-        <div style="overflow-y:scroll; height: 50%">
+        <div style="overflow-y:scroll; height: 77%">
+          <mat-paginator #paginator [length]="2" [pageSizeOptions]="[2]" aria-label="Select page" [pageIndex]="packagePageIndex"
+                         showFirstLastButtons next>
+          </mat-paginator>
         <mat-list>
-          <mat-list-item *ngFor="let shelterPackage of shelterPackages;index as indexOfelement;" style="width: 100%"
+          <mat-list-item *ngFor="let shelterPackage of showedPackages | async;index as indexOfelement;" style="width: 100%"
             [ngStyle]="{'height': '160px'}">
             <p >{{shelterPackage.orderId}}</p>
             <div style="color: gray; font-size: small; margin-left: 5%" >
@@ -80,6 +85,7 @@
               </p>
             </div>
             <p style="color: gray; font-size: small; margin-left: 5%" >Placed on: {{shelterPackage.startDate}}</p>
+            <p style="color: gray; font-size: small; margin-left: 5%" >Last updated: {{getDate(shelterPackage.updatedDate.seconds)}}</p>
             <p [ngStyle]="{color: shelterPackage.status == 'ON_WAY' ? 'orange' :
             shelterPackage.status == 'CREATED' ? 'gray' :
             shelterPackage.status == 'ARRIVED' ? 'green' : 'red',
@@ -87,6 +93,7 @@
             <hr/>
           </mat-list-item>
         </mat-list>
+
         </div>
       </mat-tab>
     </mat-tab-group>
