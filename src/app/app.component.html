@@ -8,12 +8,13 @@
   <div id="shelter-name-container" class="shelter-name-container">
     <div style="float: left; width: 50%">
       <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
+      <p *ngIf="shelterId">https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
       <p *ngIf="activeAnimalCount">
         <span style="font-weight: bold">Current adoptable animals in shelter</span> {{activeAnimalCount}}
-
       </p>
+      <p>
       <span style="font-weight: bold">Deeplink used:</span> {{deeplinkCount}}
-
+      </p>
       <p *ngIf="usersUsedShelter">
         <span style="font-weight: bold">Users in shelter:</span> {{usersUsedShelter}}
       </p>
