@@ -160,6 +160,8 @@ export class AppComponent implements OnInit {
         }
       }
       this.dataSourceWithPageSize = new MatTableDataSource(this.shelterPackages);
+      // @ts-ignore
+      this.dataSourceWithPageSize.paginator = this.paginator;
       this.showedPackages = this.dataSourceWithPageSize.connect()
 
     })
