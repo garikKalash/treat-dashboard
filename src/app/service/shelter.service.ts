@@ -34,15 +34,37 @@ export class ShelterService {
 
   shelterSentItemsByDate(id?: string, dataRange?: DateRange): Observable<ReportView> {
     console.log(id);
-    let start = dataRange?.start ? dataRange.start : '';
-    let end = dataRange?.end ? dataRange.end : '';
+    let start = '';
+    if(dataRange?.start){
+      let startDate = dataRange?.start.toLocaleDateString();
+      let partTimes = startDate.split('/');
+      start = partTimes[2] +'-'+(partTimes[0].length == 1 ? ('0' + partTimes[0]) : partTimes[0])+'-'+(partTimes[1].length == 1 ? ('0' + partTimes[1]) : partTimes[1])+'T00:00:00.000'
+    }
+    let end = '';
+    if(dataRange?.end){
+      let endDate = dataRange?.end.toLocaleDateString();
+      let partTimes = endDate.split('/');
+      end = partTimes[2] +'-'+(partTimes[0].length == 1 ? ('0' + partTimes[0]) : partTimes[0])+'-'+(partTimes[1].length == 1 ? ('0' + partTimes[1]) : partTimes[1])+'T23:59:59.000'
+
+    }
     return this.httpClient.get<ReportView>(`${environment.apiUrl}/rest/shelter/${id}/report-details?from=${start}&to=${end}`);
   }
 
   packages(id?: string, dataRange?: DateRange): Observable<ShelterPackage[]> {
     console.log(id);
-    let start = dataRange?.start ? dataRange.start : '';
-    let end = dataRange?.end ? dataRange.end : '';
+    let start = '';
+    if(dataRange?.start){
+      let startDate = dataRange?.start.toLocaleDateString();
+      let partTimes = startDate.split('/');
+      start = partTimes[2] +'-'+(partTimes[0].length == 1 ? ('0' + partTimes[0]) : partTimes[0])+'-'+(partTimes[1].length == 1 ? ('0' + partTimes[1]) : partTimes[1])+'T00:00:00.000'
+    }
+    let end = '';
+    if(dataRange?.end){
+      let endDate = dataRange?.end.toLocaleDateString();
+      let partTimes = endDate.split('/');
+      end = partTimes[2] +'-'+(partTimes[0].length == 1 ? ('0' + partTimes[0]) : partTimes[0])+'-'+(partTimes[1].length == 1 ? ('0' + partTimes[1]) : partTimes[1])+'T23:59:59.000'
+
+    }
     return this.httpClient.get<ShelterPackage[]>(`${environment.apiUrl}/rest/shelter/${id}/chewy-packages?from=${start}&to=${end}`);
   }
 

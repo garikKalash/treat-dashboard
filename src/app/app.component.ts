@@ -75,6 +75,20 @@ export class AppComponent implements OnInit {
           })
           this.shelterService.shelterSentItems(this.shelterId).subscribe(sitems =>{
             this.shelterSentData = sitems.shelterTreats;
+            if(this.shelterSentData){
+              if(this.shelterSentData.treats){
+                this.shelterSentData.treats = Math.round(this.shelterSentData.treats);
+              }
+              if(this.shelterSentData.meals){
+                this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+              }
+              if(this.shelterSentData.toys){
+                this.shelterSentData.toys = Math.round(this.shelterSentData.toys);
+              }
+              if(this.shelterSentData.foodGrains){
+                this.shelterSentData.foodGrains = Math.round(this.shelterSentData.foodGrains);
+              }
+            }
             this.activeAnimalCount = sitems.importedAnimals;
             this.shelterUpcomingData = sitems.upcomingTreats;
             this.usersUsedShelter = sitems.users;
@@ -120,12 +134,26 @@ export class AppComponent implements OnInit {
 
   onSubmit(start: any, end: any){
    let dataRange: DateRange = {
-     start: start?.toISOString().replace('Z',''),
-     end: end?.toISOString().replace('Z','')
+     start: start,
+     end: end
    }
    this.shelterService.shelterSentItemsByDate(this.shelterId, dataRange).subscribe( sitems => {
      this.serverError = undefined;
      this.shelterSentData = sitems.shelterTreats;
+     if(this.shelterSentData){
+       if(this.shelterSentData.treats){
+         this.shelterSentData.treats = Math.round(this.shelterSentData.treats);
+       }
+       if(this.shelterSentData.meals){
+         this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+       }
+       if(this.shelterSentData.toys){
+         this.shelterSentData.toys = Math.round(this.shelterSentData.toys);
+       }
+       if(this.shelterSentData.foodGrains){
+         this.shelterSentData.foodGrains = Math.round(this.shelterSentData.foodGrains);
+       }
+     }
      this.activeAnimalCount = sitems.importedAnimals;
      this.shelterUpcomingData = sitems.upcomingTreats;
      this.usersUsedShelter = sitems.users;

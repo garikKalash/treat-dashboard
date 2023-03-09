@@ -13,19 +13,15 @@
         <span style="font-weight: bold">Current adoptable animals in shelter</span> {{activeAnimalCount}}
       </p>
       <p *ngIf="shelterId"><span style="font-weight: bold">Deeplink:</span> https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
-      <p>
-      <span style="font-weight: bold">Deeplink used:</span> {{deeplinkCount}}
-      </p>
+
       <p *ngIf="usersUsedShelter">
         <span style="font-weight: bold">Users in shelter:</span> {{usersUsedShelter}}
       </p>
     </div>
     <div id="details-id" style="float: right; width: 50%">
-      <div><span style="font-weight: bold">Visitors:</span> {{shelterData?.visitors}}</div>
-      <div style="margin-top: 1%"><span style="font-weight: bold">Address:</span> {{shelterData?.shelterAddress?.address1}}</div>
-      <div style="margin-top: 1%"><span style="font-weight: bold">City:</span> {{shelterData?.shelterAddress?.city}}</div>
-      <div style="margin-top: 1%"><span style="font-weight: bold">Country:</span> {{shelterData?.shelterAddress?.country}}</div>
-      <div style="margin-top: 1%"><span style="font-weight: bold">Postal code:</span> {{shelterData?.shelterAddress?.postcode}}</div>
+      <div><span style="font-weight: bold">Weekly visitors:</span> {{shelterData?.visitors}}</div>
+      <div style="margin-top: 1%"><span style="font-weight: bold">Address:</span> {{shelterData?.shelterAddress?.address1}},
+        {{shelterData?.shelterAddress?.city}}, {{shelterData?.shelterAddress?.country}}, {{shelterData?.shelterAddress?.postcode}}</div>
     </div>
   </div>
   <div style="width: 100%" class="shelter-data">
@@ -74,7 +70,7 @@
           </mat-paginator>
         <mat-list>
           <mat-list-item *ngFor="let shelterPackage of showedPackages | async;index as indexOfelement;" style="width: 100%"
-            [ngStyle]="{'height': '160px'}">
+            [ngStyle]="{'height': '45%'}">
             <p >{{shelterPackage.orderId}}</p>
             <div style="color: gray; font-size: small; margin-left: 5%" >
               <p *ngFor="let pitem of shelterPackage.items;index as indexOfelement;">
@@ -94,7 +90,6 @@
             <hr/>
           </mat-list-item>
         </mat-list>
-
         </div>
       </mat-tab>
     </mat-tab-group>
@@ -127,11 +122,19 @@
       <span style="font-weight: bold">Toys:</span> {{shelterSentData?.toys}}
       <span style="font-weight: bold">Food grains:</span> {{shelterSentData?.foodGrains}}</p>
   </div>
-  <div *ngIf="shelterSentData" style="display: inline; float: left">
+  <div *ngIf="shelterSentData" style="display: inline; float: left;">
+    <h1 style="font-size:2vw;">Deeplink used</h1>
+    <p>
+      {{deeplinkCount}}
+    </p>
+  </div>
+  <div *ngIf="shelterSentData" style="display: inline; float: left; margin-left: 15%">
     <h1 style="font-size:2vw;">Delivered items</h1>
     <p><span style="font-weight: bold">Delivered treats:</span> {{deliveredTreats}}
-      <span style="font-weight: bold">Delivered meals:</span> {{deliveredMeals}}
+      <span style="font-weight: bold">Delivered meals:</span> {{deliveredMeals}}</p>
+
   </div>
+
 </div>
 </div>
 
