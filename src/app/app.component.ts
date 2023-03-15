@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
                 if(pi.name && pi.quantity && pi.name.includes('Kibble')){
                   const weightPart = pi.name.split(',')[1].trim().split('-')[0];
                   const weight = +weightPart;
-                  pi.meals =  5.33 * weight * pi.quantity;
+                  pi.meals =  Math.round(5.33 * weight * pi.quantity);
                   // @ts-ignore
                   if(p.status == 'ARRIVED')
                   this.deliveredMeals = this.deliveredMeals + pi.meals;
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
                 if(pi.name && pi.quantity && pi.name.includes('Treats')){
                   const weightPart = pi.name.split(',')[1].trim().split('-')[0];
                   const weight = +weightPart;
-                  pi.treats = (272/15) * weight * pi.quantity;
+                  pi.treats = Math.round((272/15) * weight * pi.quantity);
                   // @ts-ignore
                   if(p.status == 'ARRIVED')
                   this.deliveredTreats = this.deliveredTreats + pi.treats;
@@ -172,7 +172,7 @@ export class AppComponent implements OnInit {
           if(pi.name && pi.quantity && pi.name.includes('Kibble')){
             const weightPart = pi.name.split(',')[1].trim().split('-')[0];
             const weight = +weightPart;
-            pi.meals =  5.33 * weight * pi.quantity;
+            pi.meals =  Math.round(5.33 * weight * pi.quantity);
             // @ts-ignore
             if(p.status == 'ARRIVED')
             this.deliveredMeals = this.deliveredMeals + pi.meals;
@@ -180,7 +180,7 @@ export class AppComponent implements OnInit {
           if(pi.name && pi.quantity && pi.name.includes('Treats')){
             const weightPart = pi.name.split(',')[1].trim().split('-')[0];
             const weight = +weightPart;
-            pi.treats = (272/15) * weight * pi.quantity;
+            pi.treats = Math.round((272/15) * weight * pi.quantity);
             // @ts-ignore
             if(p.status == 'ARRIVED')
             this.deliveredTreats = this.deliveredTreats + pi.treats;
