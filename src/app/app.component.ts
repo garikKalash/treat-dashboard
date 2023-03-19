@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   showedPackages?: Observable<any>;
   @ViewChild('paginator') paginator?: MatPaginator;
   lastSync?:string;
+  visitors?:number = 0;
   newComment?: string;
   showComments: boolean = false;
   serverError?: string;
@@ -93,6 +94,7 @@ export class AppComponent implements OnInit {
             this.shelterUpcomingData = sitems.upcomingTreats;
             this.usersUsedShelter = sitems.users;
             this.lastSync = sitems.lastSync?.usersTime;
+            this.visitors = sitems.visitors;
             this.deeplinkCount = sitems.deepLinkCount;
           })
           this.shelterService.packages(this.shelterId).subscribe(packages => {
@@ -158,6 +160,7 @@ export class AppComponent implements OnInit {
      this.shelterUpcomingData = sitems.upcomingTreats;
      this.usersUsedShelter = sitems.users;
      this.lastSync = sitems.lastSync?.usersTime;
+     this.visitors = sitems.visitors;
      this.deeplinkCount = sitems.deepLinkCount;
    }, error => {
      this.serverError = error.error.message;
