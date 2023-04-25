@@ -14,12 +14,9 @@
       </p>
       <p *ngIf="shelterId"><span style="font-weight: bold">Deeplink:</span> https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
 
-      <p *ngIf="usersUsedShelter">
-        <span style="font-weight: bold">Users in shelter:</span> {{usersUsedShelter}}
-      </p>
     </div>
     <div id="details-id" style="float: right; width: 50%">
-      <div><span style="font-weight: bold">Weekly visitors:</span> {{visitors}}</div>
+      <div><span style="font-weight: bold">Weekly visitors:</span> {{shelterData?.visitors}}</div>
       <div style="margin-top: 1%"><span style="font-weight: bold">Address:</span> {{shelterData?.shelterAddress?.address1}},
         {{shelterData?.shelterAddress?.city}}, {{shelterData?.shelterAddress?.country}}, {{shelterData?.shelterAddress?.postcode}}</div>
     </div>
@@ -127,7 +124,10 @@
       {{deeplinkCount}}
     </p>
   </div>
-  <div *ngIf="shelterSentData" style="display: inline; float: left; margin-left: 15%">
+  <div *ngIf="usersUsedShelter" style="display: inline; float: left; margin-left: 10%">
+    <h1 style="font-size:2vw;">Users in shelter:</h1> <p>{{usersUsedShelter}}</p>
+  </div>
+  <div *ngIf="shelterSentData" style="display: inline; float: left; margin-left: 10%">
     <h1 style="font-size:2vw;">Delivered items</h1>
     <p><span style="font-weight: bold">Delivered treats:</span> {{deliveredTreats}}
       <span style="font-weight: bold">Delivered meals:</span> {{deliveredMeals}}</p>

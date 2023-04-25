@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   form!: FormGroup;
   start?: string;
   end?: string;
-  shelters?: Array<Shelter>;
   shelterPackages?: Array<ShelterPackage>;
   showedPackages?: Observable<any>;
   @ViewChild('paginator') paginator?: MatPaginator;
@@ -59,7 +58,6 @@ export class AppComponent implements OnInit {
         end: new FormControl()
       })
     });
-    this.shelters = this.shelterService.shelters();
     this.route.queryParams
       .subscribe(params => {
           console.log(params);

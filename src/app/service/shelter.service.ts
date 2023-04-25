@@ -16,14 +16,6 @@ export class ShelterService {
 
   }
 
-  shelters(){
-    return new Array<Shelter>(
-      {orgId: "CA2963",name : "HDBnQ"},
-      {orgId: "IN14",name : "Pet Refuge"},
-      {orgId: "PA109",name : "Antietam Humane Society"},
-      {orgId: "TX115",name : "Special Pals Shelter"});
-  }
-
   shelter(id?: string): Observable<Shelter> {
     return this.httpClient.get<Shelter>(`${environment.apiUrl}/rest/shelter/${id}`);
   }
