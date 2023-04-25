@@ -111,7 +111,8 @@ export class AppComponent implements OnInit {
                   this.deliveredMeals = this.deliveredMeals + pi.meals;
                 }
                 if(pi.name && pi.quantity && pi.name.includes('Treats')){
-                  const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+                  let parts = pi.name.split(',');
+                  const weightPart = parts[parts.length - 1].trim().split('-')[0];
                   const weight = +weightPart;
                   pi.treats = Math.round((272/15) * weight * pi.quantity);
                   // @ts-ignore
