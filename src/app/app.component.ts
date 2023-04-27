@@ -80,6 +80,12 @@ export class AppComponent implements OnInit {
               }
               if(this.shelterSentData.meals){
                 this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+                // @ts-ignore
+                if(this.shelterSentData.treats >= 1600){
+                  // @ts-ignore
+                  this.shelterSentData.meals = (this.shelterSentData.treats-1600)/8 + this.shelterSentData.meals;
+                    this.shelterSentData.treats = 1600;
+                }
               }
               if(this.shelterSentData.toys){
                 this.shelterSentData.toys = Math.round(this.shelterSentData.toys);
@@ -103,7 +109,8 @@ export class AppComponent implements OnInit {
               // @ts-ignore
               for(let pi of p.items ) {
                 if(pi.name && pi.quantity && pi.name.includes('Kibble')){
-                  const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+                  let parts = pi.name.split(',');
+                  const weightPart = parts[parts.length - 1].trim().split('-')[0];
                   const weight = +weightPart;
                   pi.meals =  Math.round(5.33 * weight * pi.quantity);
                   // @ts-ignore
@@ -116,8 +123,13 @@ export class AppComponent implements OnInit {
                   const weight = +weightPart;
                   pi.treats = Math.round((272/15) * weight * pi.quantity);
                   // @ts-ignore
-                  if(p.status == 'ARRIVED')
-                  this.deliveredTreats = this.deliveredTreats + pi.treats;
+                  if(p.status == 'ARRIVED'){
+                    this.deliveredTreats = this.deliveredTreats + pi.treats;
+                    if(this.deliveredTreats >= 1600){
+                      this.deliveredMeals = this.deliveredMeals + (this.deliveredTreats - 1600)/8
+                      this.deliveredTreats = 1600;
+                    }
+                  }
                 }
               }
             }
@@ -147,6 +159,12 @@ export class AppComponent implements OnInit {
        }
        if(this.shelterSentData.meals){
          this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+         // @ts-ignore
+         if(this.shelterSentData.treats >= 1600){
+           // @ts-ignore
+           this.shelterSentData.meals = (this.shelterSentData.treats-1600)/8 + this.shelterSentData.meals;
+           this.shelterSentData.treats = 1600;
+         }
        }
        if(this.shelterSentData.toys){
          this.shelterSentData.toys = Math.round(this.shelterSentData.toys);
@@ -172,7 +190,8 @@ export class AppComponent implements OnInit {
         // @ts-ignore
         for(let pi of p.items ) {
           if(pi.name && pi.quantity && pi.name.includes('Kibble')){
-            const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+            let parts = pi.name.split(',');
+            const weightPart = parts[parts.length - 1].trim().split('-')[0];
             const weight = +weightPart;
             pi.meals =  Math.round(5.33 * weight * pi.quantity);
             // @ts-ignore
@@ -180,12 +199,18 @@ export class AppComponent implements OnInit {
             this.deliveredMeals = this.deliveredMeals + pi.meals;
           }
           if(pi.name && pi.quantity && pi.name.includes('Treats')){
-            const weightPart = pi.name.split(',')[1].trim().split('-')[0];
+            let parts = pi.name.split(',');
+            const weightPart = parts[parts.length - 1].trim().split('-')[0];
             const weight = +weightPart;
             pi.treats = Math.round((272/15) * weight * pi.quantity);
             // @ts-ignore
-            if(p.status == 'ARRIVED')
-            this.deliveredTreats = this.deliveredTreats + pi.treats;
+            if(p.status == 'ARRIVED'){
+              this.deliveredTreats = this.deliveredTreats + pi.treats;
+              if(this.deliveredTreats >= 1600){
+                this.deliveredMeals = this.deliveredMeals + (this.deliveredTreats - 1600)/8
+                this.deliveredTreats = 1600;
+              }
+            }
           }
         }
       }

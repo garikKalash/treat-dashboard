@@ -12,7 +12,7 @@
       <p *ngIf="activeAnimalCount">
         <span style="font-weight: bold">Current adoptable animals in shelter</span> {{activeAnimalCount}}
       </p>
-      <p *ngIf="shelterId"><span style="font-weight: bold">Deeplink:</span> https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
+      <p *ngIf="shelterId"><span style="font-weight: bold">Gift link:</span> https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
 
     </div>
     <div id="details-id" style="float: right; width: 50%">
@@ -119,13 +119,13 @@
       <span style="font-weight: bold">Toys:</span> {{shelterSentData?.toys}}
   </div>
   <div *ngIf="shelterSentData" style="display: inline; float: left;">
-    <h1 style="font-size:2vw;">Deeplink used</h1>
+    <h1 style="font-size:2vw;">Gift link used</h1>
     <p>
       {{deeplinkCount}}
     </p>
   </div>
   <div *ngIf="usersUsedShelter" style="display: inline; float: left; margin-left: 10%">
-    <h1 style="font-size:2vw;">Users in shelter</h1> <p>{{usersUsedShelter}}</p>
+    <h1 style="font-size:2vw;">Users</h1> <p>{{usersUsedShelter}}</p>
   </div>
   <div *ngIf="shelterSentData" style="display: inline; float: left; margin-left: 10%">
     <h1 style="font-size:2vw;">Delivered items</h1>
