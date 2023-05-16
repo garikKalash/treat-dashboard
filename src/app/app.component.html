@@ -10,13 +10,13 @@
       <a href="{{shelterData?.shelterLink}}">{{shelterData?.name}}</a>
 
       <p *ngIf="activeAnimalCount">
-        <span style="font-weight: bold">Current adoptable animals in shelter</span> {{activeAnimalCount}}
+        <span style="font-weight: bold">Adoptable dogs on Petfinder:</span> {{activeAnimalCount}}
       </p>
       <p *ngIf="shelterId"><span style="font-weight: bold">Gift link:</span> https://treatapp.page.link/{{shelterId.toLowerCase()}}_deeplink</p>
 
     </div>
     <div id="details-id" style="float: right; width: 50%">
-      <div><span style="font-weight: bold">Weekly visitors:</span> {{shelterData?.visitors}}</div>
+      <div><span style="font-weight: bold">Weekly physical visitors:</span> {{shelterData?.visitors}}</div>
       <div style="margin-top: 1%"><span style="font-weight: bold">Address:</span> {{shelterData?.shelterAddress?.address1}},
         {{shelterData?.shelterAddress?.city}}, {{shelterData?.shelterAddress?.country}}, {{shelterData?.shelterAddress?.postcode}}</div>
     </div>
@@ -129,8 +129,8 @@
   </div>
   <div *ngIf="shelterSentData" style="display: inline; float: left; margin-left: 10%">
     <h1 style="font-size:2vw;">Delivered items</h1>
-    <p><span style="font-weight: bold">Delivered treats:</span> {{deliveredTreats}}
-      <span style="font-weight: bold">Delivered meals:</span> {{deliveredMeals}}</p>
+    <p><span style="font-weight: bold">Treats:</span> {{deliveredTreats}}
+      <span style="font-weight: bold">Meals:</span> {{deliveredMeals}}</p>
 
   </div>
 
