@@ -125,10 +125,6 @@ export class AppComponent implements OnInit {
                   // @ts-ignore
                   if(p.status == 'ARRIVED'){
                     this.deliveredTreats = this.deliveredTreats + pi.treats;
-                    if(this.deliveredTreats >= 1600){
-                      this.deliveredMeals = this.deliveredMeals + (this.deliveredTreats - 1600)/8
-                      this.deliveredTreats = 1600;
-                    }
                   }
                 }
               }
@@ -206,10 +202,6 @@ export class AppComponent implements OnInit {
             // @ts-ignore
             if(p.status == 'ARRIVED'){
               this.deliveredTreats = this.deliveredTreats + pi.treats;
-              if(this.deliveredTreats >= 1600){
-                this.deliveredMeals = this.deliveredMeals + (this.deliveredTreats - 1600)/8
-                this.deliveredTreats = 1600;
-              }
             }
           }
         }
