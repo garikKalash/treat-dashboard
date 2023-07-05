@@ -81,10 +81,10 @@ export class AppComponent implements OnInit {
               if(this.shelterSentData.meals){
                 this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
                 // @ts-ignore
-                if(this.shelterSentData.treats >= 1600){
+                if(this.shelterSentData.treats >= this.shelterData?.monthlyNeedTreats){
                   // @ts-ignore
-                  this.shelterSentData.meals = (this.shelterSentData.treats-1600)/8 + this.shelterSentData.meals;
-                    this.shelterSentData.treats = 1600;
+                  this.shelterSentData.meals = (this.shelterSentData.treats-this.shelterData?.monthlyNeedTreats)/8 + this.shelterSentData.meals;
+                    this.shelterSentData.treats = this.shelterData?.monthlyNeedTreats;
                 }
               }
               if(this.shelterSentData.toys){
@@ -156,10 +156,10 @@ export class AppComponent implements OnInit {
        if(this.shelterSentData.meals){
          this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
          // @ts-ignore
-         if(this.shelterSentData.treats >= 1600){
+         if(this.shelterSentData.treats >= this.shelterData?.monthlyNeedTreats){
            // @ts-ignore
-           this.shelterSentData.meals = (this.shelterSentData.treats-1600)/8 + this.shelterSentData.meals;
-           this.shelterSentData.treats = 1600;
+           this.shelterSentData.meals = (this.shelterSentData.treats-this.shelterData?.monthlyNeedTreats)/8 + this.shelterSentData.meals;
+           this.shelterSentData.treats = this.shelterData?.monthlyNeedTreats;
          }
        }
        if(this.shelterSentData.toys){

@@ -8,4 +8,7 @@ export class Shelter {
   shelterLink?: string;
   shelterAddress?: Address;
   comments?: Comment[] = [];
+
+  monthlyNeedMeals?: number;
+  monthlyNeedTreats?: number;
 }
