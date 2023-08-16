@@ -80,11 +80,13 @@ export class AppComponent implements OnInit {
               }
               if(this.shelterSentData.meals){
                 this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+                let treatsInCount = this.shelterData?.monthlyNeedTreats ? this.shelterData?.monthlyNeedTreats * 290 : this.shelterData?.monthlyNeedTreats;
                 // @ts-ignore
-                if(this.shelterSentData.treats >= this.shelterData?.monthlyNeedTreats){
+                if(this.shelterSentData.treats >= treatsInCount){
+
                   // @ts-ignore
-                  this.shelterSentData.meals = (this.shelterSentData.treats-this.shelterData?.monthlyNeedTreats)/8 + this.shelterSentData.meals;
-                    this.shelterSentData.treats = this.shelterData?.monthlyNeedTreats;
+                  this.shelterSentData.meals = (this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals;
+                    this.shelterSentData.treats = treatsInCount;
                 }
               }
               if(this.shelterSentData.toys){
@@ -155,11 +157,12 @@ export class AppComponent implements OnInit {
        }
        if(this.shelterSentData.meals){
          this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
+         let treatsInCount = this.shelterData?.monthlyNeedTreats ? this.shelterData?.monthlyNeedTreats * 290 : this.shelterData?.monthlyNeedTreats;
          // @ts-ignore
-         if(this.shelterSentData.treats >= this.shelterData?.monthlyNeedTreats){
+         if(this.shelterSentData.treats >= treatsInCount){
            // @ts-ignore
-           this.shelterSentData.meals = (this.shelterSentData.treats-this.shelterData?.monthlyNeedTreats)/8 + this.shelterSentData.meals;
-           this.shelterSentData.treats = this.shelterData?.monthlyNeedTreats;
+           this.shelterSentData.meals = (this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals;
+           this.shelterSentData.treats = treatsInCount;
          }
        }
        if(this.shelterSentData.toys){
