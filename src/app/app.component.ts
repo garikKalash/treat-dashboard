@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
        }
        if(this.shelterSentData.meals){
          this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
-         let treatsInCount = this.shelterData?.monthlyNeedTreats ? this.shelterData?.monthlyNeedTreats * 19.342 : this.shelterData?.monthlyNeedTreats;
+         let treatsInCount = this.shelterData?.monthlyNeedTreats ? this.shelterData?.monthlyNeedTreats  : this.shelterData?.monthlyNeedTreats;
          // @ts-ignore
          if(this.shelterSentData.treats >= treatsInCount){
            // @ts-ignore
