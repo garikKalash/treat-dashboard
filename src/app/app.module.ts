@@ -19,34 +19,55 @@ import {MatInputModule} from "@angular/material/input";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatListModule} from "@angular/material/list";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { MedSupplyComponent } from './components/med-supply/med-supply.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { ShelterDataComponent } from './components/shelter-data/shelter-data.component';
+import {Location} from "@angular/common";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatCardModule} from "@angular/material/card";
+import {MedicalSuppliesService} from "./service/medical-supplies.service";
+import {MedTypeService} from "./service/med-type.service";
+import { ShelterSettingsComponent } from './components/shelter-settings/shelter-settings.component';
+import {NewShelterDialogComponent} from "./components/new-shelter-dialog/new-shelter-dialog.component";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MedSupplyComponent,
+    ShelterDataComponent,
+    ShelterSettingsComponent,
+    NewShelterDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        FormsModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatInputModule,
-        MatTabsModule,
-        MatListModule,
-        MatPaginatorModule
-    ],
-  providers: [ShelterService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    FormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatTabsModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatDialogModule
+  ],
+  providers: [ShelterService, MedicalSuppliesService, MedTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

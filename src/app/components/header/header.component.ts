@@ -9,6 +9,6 @@ import {Shelter} from "../../models/shelter.model";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  activeLink: string = 'main';
 
 }

@@ -1,0 +1,19 @@
+<div style="justify-content: space-between; display: flex">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Shelters</mat-label>
+      <mat-select [(ngModel)]="selectedShelter">
+        <mat-option *ngFor="let shelter of shelters" [value]="shelter" >
+          {{shelter.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button (click)="openDialog()">Add shelter</button>
+  </div>
+</div>
+<div *ngIf="selectedShelter">
+  <mat-slide-toggle [checked]="selectedShelter.availableInSystem" (change)="changeAvailability()">Available in system</mat-slide-toggle>
+</div>
+

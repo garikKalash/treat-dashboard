@@ -11,4 +11,5 @@ export class Shelter {
 
   monthlyNeedMeals?: number;
   monthlyNeedTreats?: number;
+  availableInSystem?: boolean;
 }

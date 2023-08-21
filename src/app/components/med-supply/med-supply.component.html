@@ -1,0 +1,135 @@
+<mat-tab-group>
+  <mat-tab label="Shelter configs">
+    <div style="width: 100%">
+    <mat-form-field appearance="fill">
+      <mat-label>Shelters</mat-label>
+      <mat-select [(ngModel)]="selectedShelter" (selectionChange)="onChangeShelter()">
+        <mat-option *ngFor="let shelter of shelters" [value]="shelter" >
+          {{shelter.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+    <div *ngIf="shelterConfigs.length == 0"> Loading...</div>
+    <div style="width: 100%" *ngIf="shelterConfigs.length > 0">
+      <mat-card class="example-card" *ngFor="let sc of shelterConfigs">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + sc.medSupply?.logoUrl + ')' }"></div>
+        <mat-card-title>{{sc.medSupply?.name}}</mat-card-title>
+        <mat-card-subtitle>{{sc.medSupply?.medSupplyType?.name}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Count for adults: {{sc?.countForAdult}}
+        </p>
+        <p>
+          Count for adults: {{sc?.countForYoung}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="warn">Delete</button>
+
+      </mat-card-actions>
+    </mat-card>
+    </div>
+    <div style="margin-left: 5%; margin-top: 2%">
+      <div class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Shelter name</mat-label>
+          <input matInput disabled value="{{selectedShelter?.name}}">
+        </mat-form-field>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Count for adult</mat-label>
+            <input matInput [(ngModel)]="newMedSupplyToShelter.countForAdult">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Count for young</mat-label>
+            <input matInput [(ngModel)]="newMedSupplyToShelter.countForYoung">
+          </mat-form-field></td>
+          <td><mat-form-field appearance="fill">
+            <mat-label>Medical supplies</mat-label>
+            <mat-select [(ngModel)]="newMedSupplyToShelter.medSupply">
+              <mat-option *ngFor="let medSupply of medSupplies" [value]="medSupply" >
+                {{medSupply.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field></td>
+          <td><button mat-raised-button color="primary" (click)="addNewMedicalSupplyIntoShelter()">Add Configuration</button></td>
+        </tr></table>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Medical supply types"> <div style="width: 100%">
+    <mat-card class="example-card" *ngFor="let sc of medTypes">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{sc?.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-button color="warn">Delete</button>
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div style="margin-left: 5%">
+    <mat-form-field class="example-full-width">
+      <mat-label>New type name</mat-label>
+      <input matInput [(ngModel)]="newTypeName">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addNewSupplyType()">Add Supply Type</button>
+  </div></mat-tab>
+  <mat-tab label="Medical supplies">
+    <div style="width: 100%">
+      <mat-card class="example-card" *ngFor="let sc of medSupplies">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + sc?.logoUrl + ')' }"></div>
+          <mat-card-title>{{sc?.name}}</mat-card-title>
+          <mat-card-subtitle>{{sc?.medSupplyType?.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Type: {{sc?.medSupplyType?.name}}
+          </p>
+          <p>
+            Kibbles: {{sc?.kibbles}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="warn">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div style="margin-left: 5%; margin-top: 2%">
+      <div class="example-form">
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="newMedSupply.name">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Kibbles</mat-label>
+            <input matInput [(ngModel)]="newMedSupply.kibbles">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Logo URL</mat-label>
+            <input matInput [(ngModel)]="newMedSupply.logoUrl">
+          </mat-form-field></td>
+          <td><mat-form-field appearance="fill">
+            <mat-label>Medical supply types</mat-label>
+            <mat-select [(ngModel)]="newMedSupply.medSupplyType">
+              <mat-option *ngFor="let medType of medTypes" [value]="medType" >
+                {{medType.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field></td>
+          <td><button mat-raised-button color="primary" (click)="addNewMedicalSupply()">Add Medical Supply</button></td>
+        </tr></table>
+      </div>
+    </div>
+
+  </mat-tab>
+</mat-tab-group>
+<div *ngIf="errorContent" style="color: red">{{errorContent}}</div>

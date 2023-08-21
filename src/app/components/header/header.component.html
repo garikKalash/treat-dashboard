@@ -1,4 +1,35 @@
 <div class="container">
   <h2>Welcome TREAT dashboard</h2>
 </div>
-
+<nav mat-tab-nav-bar>
+  <button
+    mat-tab-link
+    mat-raised-button
+    (click)="activeLink = 'main'"
+    [routerLink]="['main']"
+    [matTooltip]="'main hint'"
+    routerLinkActive="active-link"
+  >
+    Dashboard
+  </button>
+  <button
+    mat-tab-link
+    mat-raised-button
+    routerLinkActive="active-link"
+    [routerLink]="['medical-supply']"
+    [matTooltip]="'medical-supply'"
+    (click)="activeLink = 'medical-supply'"
+  >
+    Medical supplies
+  </button>
+  <button
+    mat-tab-link
+    mat-raised-button
+    routerLinkActive="active-link"
+    [routerLink]="['shelter-settings']"
+    [matTooltip]="'shelter-settings'"
+    (click)="activeLink = 'shelter-settings'"
+  >
+    Shelter settings
+  </button>
+</nav>
