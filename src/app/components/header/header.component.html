@@ -19,6 +19,7 @@
     [routerLink]="['medical-supply']"
     [matTooltip]="'medical-supply'"
     (click)="activeLink = 'medical-supply'"
+    *ngIf="isAdmin"
   >
     Medical supplies
   </button>
@@ -29,6 +30,7 @@
     [routerLink]="['shelter-settings']"
     [matTooltip]="'shelter-settings'"
     (click)="activeLink = 'shelter-settings'"
+    *ngIf="isAdmin"
   >
     Shelter settings
   </button>

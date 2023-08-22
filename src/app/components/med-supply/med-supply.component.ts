@@ -27,9 +27,16 @@ export class MedSupplyComponent implements OnInit {
 
   errorContent: string | undefined;
 
+  isAdmin: boolean = false;
+
+
   constructor(private shelterService: ShelterService,
               private medSupplyService: MedicalSuppliesService,
               private medTypeService: MedTypeService) {
+    let pass = localStorage.getItem("treat_app_admin");
+    if(pass === 'j$wtAE=7kNGB') {
+      this.isAdmin = true;
+    }
 
   }
 

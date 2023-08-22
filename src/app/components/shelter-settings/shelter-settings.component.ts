@@ -15,10 +15,14 @@ export class ShelterSettingsComponent implements OnInit {
   shelters: Shelter[] = [];
   newName: string | undefined;
   contact: string | undefined;
+  isAdmin: boolean = false;
 
 
   constructor(private shelterService: ShelterService, public dialog: MatDialog) {
-
+    let pass = localStorage.getItem("treat_app_admin");
+    if(pass === 'j$wtAE=7kNGB') {
+      this.isAdmin = true;
+    }
   }
 
   ngOnInit(): void {

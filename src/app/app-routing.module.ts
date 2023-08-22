@@ -7,12 +7,7 @@ import {ShelterSettingsComponent} from "./components/shelter-settings/shelter-se
 const routes: Routes = [
   {
     path: "main",
-    component: ShelterDataComponent,
-    data: {
-      isTab: true,
-      tabName: "The First Tab",
-      tabHint: ""
-    }
+    component: ShelterDataComponent
   },
   {
     path: "medical-supply",
