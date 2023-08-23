@@ -60,12 +60,9 @@ export class MedSupplyComponent implements OnInit {
   }
 
   addNewMedicalSupply():void{
-    if(!this.newMedSupply.medSupplyType
-      || !this.newMedSupply.logoUrl
-      || !this.newMedSupply.name
-      || !this.newMedSupply.kibbles
-    ) {
+    if(!this.validateNewMedSupply()) {
       this.errorContent = "Invalid data please correct the data before the submit";
+      return;
     }
     this.errorContent = undefined;
     this.medSupplyService.addMedicalSupply(this.newMedSupply).subscribe(r=>{
@@ -81,6 +78,13 @@ export class MedSupplyComponent implements OnInit {
       this.medSupplies.push(copyMedSupply);
       this.newMedSupply = new MedSupplyDto();
     })
+  }
+
+  validateNewMedSupply(): boolean{
+    return this.newMedSupply.medSupplyType !== undefined
+      && this.newMedSupply.logoUrl !== undefined
+      && this.newMedSupply.name !== undefined
+      && this.newMedSupply.kibbles !== undefined;
   }
 
   addNewMedicalSupplyIntoShelter():void{

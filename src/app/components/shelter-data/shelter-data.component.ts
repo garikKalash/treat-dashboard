@@ -83,8 +83,9 @@ export class ShelterDataComponent implements OnInit {
                   if(this.shelterSentData.treats >= treatsInCount){
 
                     // @ts-ignore
-                    this.shelterSentData.meals = (this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals;
-                    this.shelterSentData.treats = treatsInCount;
+                    this.shelterSentData.meals = Math.round((this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals);
+                    // @ts-ignore
+                    this.shelterSentData.treats = Math.round(treatsInCount);
                   }
                 }
                 if(this.shelterSentData.toys){
@@ -159,8 +160,9 @@ export class ShelterDataComponent implements OnInit {
           // @ts-ignore
           if(this.shelterSentData.treats >= treatsInCount){
             // @ts-ignore
-            this.shelterSentData.meals = (this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals;
-            this.shelterSentData.treats = treatsInCount;
+            this.shelterSentData.meals = Math.round((this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals);
+            // @ts-ignore
+            this.shelterSentData.treats = Math.round(treatsInCount);
           }
         }
         if(this.shelterSentData.toys){
