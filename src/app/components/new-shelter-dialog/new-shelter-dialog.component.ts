@@ -26,7 +26,8 @@ export class NewShelterDialogComponent {
     let data = {
       shelter: this.data.name,
       animal_type: 'Dog',
-      contact: this.data.contact
+      contact: this.data.contact,
+      minimumSupportedVersion: this.data.minimumSupportedVersion
     }
 
     this.shelterService.create(data).subscribe(()=>{

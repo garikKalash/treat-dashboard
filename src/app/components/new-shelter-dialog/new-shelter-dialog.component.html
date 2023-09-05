@@ -12,6 +12,12 @@
       <input matInput [(ngModel)]="data.name">
     </mat-form-field>
   </div>
+  <div>
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Minimum supported version</mat-label>
+      <input matInput [(ngModel)]="data.minimumSupportedVersion">
+    </mat-form-field>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>
