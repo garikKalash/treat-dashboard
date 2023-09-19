@@ -18,11 +18,11 @@ export class MedicalSuppliesService{
 
   addMedicalSupplyToShelter(medSupplyToShelter: ShelterConfigs): Observable<any> {
     let data = {
-      countOfAdult: medSupplyToShelter.countForAdult,
-      countOfYoung: medSupplyToShelter.countForYoung,
+      countForAdult: medSupplyToShelter.countForAdult,
+      countForYoung: medSupplyToShelter.countForYoung,
       medSupplyId: medSupplyToShelter.medSupply?.supplyId
     }
-    return this.httpClient.put<any>(`${environment.apiUrl}/rest/med-supplies/upsert/${medSupplyToShelter.orgId}`, data)
+    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelter/med-supplies/upsert/${medSupplyToShelter.orgId}`, data)
   }
 
   addMedicalSupply(medSupplyToShelter: MedSupplyDto): Observable<string> {

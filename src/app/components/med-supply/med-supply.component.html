@@ -20,7 +20,11 @@
       </mat-card-header>
       <mat-card-content>
         <p>
-          Count for adults: {{sc?.countForAdult}}
+          Count for adult large: {{sc?.countForAdult?.large}}
+          <br/>
+          Count for adult medium: {{sc?.countForAdult?.medium}}
+          <br/>
+          Count for adult small: {{sc?.countForAdult?.small}}
         </p>
         <p>
           Count for adults: {{sc?.countForYoung}}
@@ -41,8 +45,16 @@
 
         <table class="example-full-width" cellspacing="0"><tr>
           <td><mat-form-field class="example-full-width">
-            <mat-label>Count for adult</mat-label>
-            <input matInput [(ngModel)]="newMedSupplyToShelter.countForAdult">
+            <mat-label>Count for adult large</mat-label>
+            <input matInput [(ngModel)]="newMedSupplyToShelter.countForAdult.large">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Count for adult medium</mat-label>
+            <input matInput [(ngModel)]="newMedSupplyToShelter.countForAdult.medium">
+          </mat-form-field></td>
+          <td><mat-form-field class="example-full-width">
+            <mat-label>Count for adult small</mat-label>
+            <input matInput [(ngModel)]="newMedSupplyToShelter.countForAdult.small">
           </mat-form-field></td>
           <td><mat-form-field class="example-full-width">
             <mat-label>Count for young</mat-label>
