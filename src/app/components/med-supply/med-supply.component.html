@@ -126,6 +126,12 @@
             <input matInput [(ngModel)]="newMedSupply.kibbles">
           </mat-form-field></td>
           <td><mat-form-field class="example-full-width">
+            <mat-label>Equivalent kibbles for price</mat-label>
+            <input matInput [(ngModel)]="price">
+          </mat-form-field>
+            <br>
+            Equivalent kibbles: {{(price/0.13) * 320}}</td>
+          <td><mat-form-field class="example-full-width">
             <mat-label>Logo URL</mat-label>
             <input matInput [(ngModel)]="newMedSupply.logoUrl">
           </mat-form-field></td>

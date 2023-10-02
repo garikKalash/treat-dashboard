@@ -24,6 +24,7 @@ export class MedSupplyComponent implements OnInit {
   medTypes: MedSupplyTypeModel[] = [];
 
   newTypeName: string | undefined;
+  price: number = 0;
 
   errorContent: string | undefined;
 
