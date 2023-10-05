@@ -78,12 +78,12 @@ export class ShelterDataComponent implements OnInit {
                 }
                 if(this.shelterSentData.meals){
                   this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
-                  let treatsInCount = this.shelterData?.monthlyNeedTreats ? this.shelterData?.monthlyNeedTreats * 19.342 : this.shelterData?.monthlyNeedTreats;
+                  let treatsInCount = this.shelterData?.monthlyNeedTreats;
                   // @ts-ignore
                   if(this.shelterSentData.treats >= treatsInCount){
 
                     // @ts-ignore
-                    this.shelterSentData.meals = Math.round((this.shelterSentData.treats- treatsInCount)/8 + this.shelterSentData.meals);
+                    this.shelterSentData.meals = Math.round((this.shelterSentData.treats- treatsInCount)/10 + this.shelterSentData.meals);
                     // @ts-ignore
                     this.shelterSentData.treats = Math.round(treatsInCount);
                   }
