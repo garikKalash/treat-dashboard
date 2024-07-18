@@ -37,7 +37,7 @@ export class ShelterService {
     return this.httpClient.get<ReportView>(`https://dashboard-v1-0-0-dot-dogapp-67827.appspot.com/rest/reports/${id}/report-details`);
   }
   changeAvailability(id: any): Observable<any> {
-    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelter/${id}/change-availability`,{});
+    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelters/${id}/change-availability`,{});
   }
 
   shelterSentItemsByDate(id?: string, dataRange?: DateRange): Observable<ReportView> {
@@ -73,10 +73,10 @@ export class ShelterService {
       end = partTimes[2] +'-'+(partTimes[0].length == 1 ? ('0' + partTimes[0]) : partTimes[0])+'-'+(partTimes[1].length == 1 ? ('0' + partTimes[1]) : partTimes[1])+'T23:59:59.000'
 
     }
-    return this.httpClient.get<ShelterPackage[]>(`https://dashboard-v1-0-0-dot-dogapp-67827.appspot.com/rest/shelter/${id}/chewy-packages?from=${start}&to=${end}`);
+    return this.httpClient.get<ShelterPackage[]>(`https://dashboard-v1-0-0-dot-dogapp-67827.appspot.com/rest/shelters/${id}/chewy-packages?from=${start}&to=${end}`);
   }
 
   updateComments(id?: string, comments? : Comment[]): Observable<any>{
-    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelter/${id}/comments`, comments);
+    return this.httpClient.put<any>(`${environment.apiUrl}/rest/shelters/${id}/comments`, comments);
   }
 }
