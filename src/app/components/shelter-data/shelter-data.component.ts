@@ -76,6 +76,9 @@ export class ShelterDataComponent implements OnInit {
                 if(this.shelterSentData.treats){
                   this.shelterSentData.treats = Math.round(this.shelterSentData.treats);
                 }
+                if(this.shelterSentData.treats){
+                  this.shelterSentData.treats = Math.round(this.shelterSentData.treats);
+                }
                 if(this.shelterSentData.meals){
                   this.shelterSentData.meals = Math.round(this.shelterSentData.meals);
                   let treatsInCount = this.shelterData?.monthlyNeedTreats;

@@ -110,11 +110,12 @@
       </mat-form-field>
     </div>
     <div class="warning" *ngIf="serverError">{{serverError}}</div>
-    <div *ngIf="shelterSentData" style="display: inline; float: right; width: 25%">
+    <div *ngIf="shelterSentData" style="display: inline; float: right; width: 31%">
       <h1 style="font-size:2vw;">Earned items</h1>
       <p><span style="font-weight: bold">Treats:</span> {{shelterSentData?.treats}}
         <span style="font-weight: bold">Meals:</span> {{shelterSentData?.meals}}
-        <span style="font-weight: bold">Toys:</span> {{shelterSentData?.toys}}</p>
+        <span style="font-weight: bold">Toys:</span> {{shelterSentData?.toys}}
+        <span style="font-weight: bold">Medical meals:</span> {{shelterSentData?.medicalMeal}}</p>
       <p style="font-style: italic; font-size: small">* Any extra treats earned are converted to meals based on the price difference</p>
     </div>
     <div *ngIf="shelterSentData" style="display: inline; float: left;">
